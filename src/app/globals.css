@@ -166,3 +166,7 @@
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
+
+.radial {
+    border-radius : 15px;
+}
