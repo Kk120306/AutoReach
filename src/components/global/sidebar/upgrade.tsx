@@ -10,7 +10,7 @@ const UpgradeCard = (props: UpgradeCardProps) => {
         <div className="bg-[#252525] p-3 rounded-2xl flex flex-col gap-y-3">
             <span className="text-sm">
                 Upgrade to {''}
-                <span className="bg-gradient-to-r from-[#FF8A00] to-[#E52E71] bg-clip-text text-transparent font-bold">
+                <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent font-bold">
                     Smart AI
                 </span>
             </span>

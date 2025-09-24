@@ -2,7 +2,7 @@ import { Zap } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
-const Navbar = () => {
+const InfoBar = () => {
     return (
         <nav className="border-b border-gray-800 bg-black/80 backdrop-blur-sm top-0 z-50 relative">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,4 +43,4 @@ const Navbar = () => {
     );
 }
 
-export default Navbar;
+export default InfoBar;

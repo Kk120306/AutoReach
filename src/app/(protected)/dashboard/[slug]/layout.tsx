@@ -1,6 +1,6 @@
 import React from 'react'
 import Sidebar from '@/components/global/sidebar'
-import Navbar from '@/components/global/navbar'
+import InfoBar from '@/components/global/infobar'
 
 type layoutProps = {
     children: React.ReactNode
@@ -15,8 +15,9 @@ const layout = ({ children, params }: layoutProps) => {
             <Sidebar slug={params.slug} />
             {/* NAVBAR */}
             <div className="lg:ml-[250px]
-            lg:pl-10 lg:py-5 flex flex-col overflow-auto ">
-                <Navbar slug={params.slug}/>
+            lg:pl-10 lg:py-5 px-2 flex flex-col overflow-auto ">
+                <InfoBar slug={params.slug}/>
+                {children}
             </div>
         </div>
     )

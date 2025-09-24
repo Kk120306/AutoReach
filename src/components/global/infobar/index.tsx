@@ -11,13 +11,17 @@ import { BadgeQuestionMark } from 'lucide-react'
 import { SubscriptionPlan } from '../subscription-plan'
 import UpgradeCard from '../sidebar/upgrade'
 import LogoSmall from '@/svgs/logo-small'
+import SearchBar from '../search'
+import CreateAutomation from '../create-automation'
+import { Notifications } from './notifications'
+import MainBreadCrumb from '../main-bread-crumb'
 
 
-type NavbarProps = {
+type InfoBarProps = {
     slug: string
 }
 
-const Navbar = ({ slug }: NavbarProps) => {
+const InfoBar = ({ slug }: InfoBarProps) => {
     const { page } = usePath();
     const currentPage = PAGE_BREAD_CRUMBS.includes(page) || page == slug
     return currentPage && (
@@ -60,9 +64,16 @@ const Navbar = ({ slug }: NavbarProps) => {
                         </div>
                     </Sheet>
                 </span>
+                <SearchBar />
+                <CreateAutomation />
+                <Notifications />
             </div>
+            <MainBreadCrumb 
+                page={page === slug ? 'Home' : page}
+                slug={slug}
+            />
         </div>
     )
 }
 
-export default Navbar
+export default InfoBar
