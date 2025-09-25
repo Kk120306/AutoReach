@@ -1,6 +1,8 @@
 import { Check } from 'lucide-react'
 import React from 'react'
-import CreateAutomationButton from '@/components/global/create-automation-button'
+import CreateAutomation from '@/components/global/create-automation'
+import AutomationList from '@/components/global/automation-list'
+
 
 type PageProps = {
 
@@ -9,7 +11,7 @@ type PageProps = {
 const Page = (props: PageProps) => {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-6 gap-5">
-            <div className="lg:col-span-4">Automate List</div>
+            <div className="lg:col-span-4"><AutomationList /></div>
             <div className="lg:col-span-2">
                 <div className="flex flex-col rounded-lg bg-background-80 gap-y-6 
                     p-5 border-[1px] overflow-hidden border-in-active">
@@ -28,7 +30,7 @@ const Page = (props: PageProps) => {
                             </div>
                         ))}
                     </div>
-                    <CreateAutomationButton />
+                    <CreateAutomation />
                 </div>
             </div>
         </div>
