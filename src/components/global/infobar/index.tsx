@@ -14,7 +14,7 @@ import LogoSmall from '@/svgs/logo-small'
 import SearchBar from '../search'
 import CreateAutomation from '../create-automation'
 import { Notifications } from './notifications'
-import MainBreadCrumb from '../main-bread-crumb'
+import MainBreadCrumb from '../bread-crumbs/main-bread-crumb'
 
 
 type InfoBarProps = {
