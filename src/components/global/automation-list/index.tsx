@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { useQueryAutomations } from '@/hooks/use-queries'
 import CreateAutomation from '../create-automation'
 import { cn, getMonth } from '@/lib/utils'
+import { useMutationDataState } from '@/hooks/use-mutation-data'
 
 type AutomationListProps = {
 
@@ -15,6 +16,8 @@ type AutomationListProps = {
 const AutomationList = (props: AutomationListProps) => {
 
     const { data } = useQueryAutomations();
+
+    const { latestVariable } = useMutationDataState(['create-automation']);
 
     const { pathName } = usePath()
 
