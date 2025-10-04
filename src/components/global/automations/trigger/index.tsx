@@ -5,6 +5,9 @@ type TriggerProps = {
 }
 
 const Trigger = ({ id }: TriggerProps) => {
+
+    const { } = useTrigger();
+
     return (
         <div>
             

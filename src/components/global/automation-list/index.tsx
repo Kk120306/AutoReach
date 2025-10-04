@@ -8,6 +8,7 @@ import { useQueryAutomations } from '@/hooks/use-queries'
 import CreateAutomation from '../create-automation'
 import { cn, getMonth } from '@/lib/utils'
 import { useMutationDataState } from '@/hooks/use-mutation-data'
+import { useMemo } from 'react'
 
 type AutomationListProps = {
 
@@ -31,9 +32,16 @@ const AutomationList = (props: AutomationListProps) => {
 
     }
 
+    const optimisticUiData = useMemo(() => {
+        if (latestVariable?.variables) {
+            return { data: [latestVariable.variables, ...data.data] };
+        }
+        return data;
+    }, [latestVariable, data])
+
     return (
         <div className="flex flex-col gap-3">
-            {data.data.map((automation) => (
+            {optimisticUiData.data.map((automation) => (
                 <Link href={`${pathName}/${automation.id}`}
                     key={automation.id}
                     className="bg-[#1D1D1D] hover:opacity-80 transition duration-100 rounded-lg p-5 border-[1px] radial--gradient--automations flex border-[#545454]"
@@ -45,7 +53,7 @@ const AutomationList = (props: AutomationListProps) => {
                             <div className="flex gap-2 flex-wap mt-3">
                                 <div className={cn(
                                     'rounded-full px-4 py-1 capitalize',
-                                    (0 + 1) % 1 === 0 &&
+                                     (0 + 1) % 1 === 0 &&
                                     'bg-keycord-green/15 border-2 border-keycord-green',
                                     (1 + 1) % 2 === 0 &&
                                     'bg-keycord-purple/15 border-2 border-keycord-purple',
