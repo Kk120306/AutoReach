@@ -56,7 +56,7 @@ export const findAutomation = async (id: string) => {
     })
 }
 
-export const updateAutomation = async (id: string, update : {
+export const updateAutomation = async (id: string, update: {
     name?: string
     active?: boolean
 }) => {
@@ -65,8 +65,98 @@ export const updateAutomation = async (id: string, update : {
             id
         },
         data: {
-            name : update.name,
+            name: update.name,
             active: update.active
+        }
+    })
+}
+
+
+export const addListener = async (automationId: string, listener: 'SMARTAI' | 'MESSAGE', prompt: string, reply?: string) => {
+    return await client.automation.update({
+        where: {
+            id: automationId
+        },
+        data: {
+            listener: {
+                create: {
+                    listener,
+                    prompt,
+                    commentReply: reply
+                }
+            }
+        }
+    })
+}
+
+export const addTrigger = async (automationId: string, trigger: string[]) => {
+    if (trigger.length === 2) {
+        return await client.automation.update({
+            where: { id: automationId },
+            data: {
+                trigger: {
+                    createMany: {
+                        data: [{ type: trigger[0] }, { type: trigger[1] }]
+                    }
+                }
+            }
+        })
+    }
+    return await client.automation.update({
+        where: {
+            id: automationId
+        },
+        data: {
+            trigger: {
+                create: {
+                    type: trigger[0]
+                }
+            }
+        }
+    })
+}
+
+export const addKeyword = async (automationId: string, keyword: string) => {
+    return await client.automation.update({
+        where: {
+            id: automationId
+        },
+        data: {
+            keywords: {
+                create: {
+                    word: keyword
+                }
+            }
+        }
+    })
+}
+
+export const deleteKeywordQuery = async (id: string) => {
+    return await client.keyword.delete({
+        where: {
+            id
+        }
+    })
+}
+
+export const addPost = async (automationId: string,
+    posts: {
+        postId: string,
+        caption?: string,
+        media: string,
+        mediaType: 'IMAGE' | 'VIDEO' | 'CAROUSEL_ALBUM'
+    }[]
+) => {
+    return await client.automation.update({
+        where: {
+            id: automationId
+        },
+        data: {
+            posts: {
+                createMany: {
+                    data: posts,
+                }
+            }
         }
     })
 }
