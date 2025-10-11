@@ -4,10 +4,51 @@ import { client } from "@/lib/prisma";
 
 export const updateIntegration = async (token: string, expire: Date, id: string) => {
     return await client.integration.update({
-        where : {id},
-        data : {
+        where: { id },
+        data: {
             token,
             expiresAt: expire
+        }
+    })
+}
+
+export const getIntegration = async (clerkId: string) => {
+    return await client.user.findUnique({
+        where: {
+            clerkId
+        },
+        select: {
+            integrations: {
+                where: {
+                    name: "INSTAGRAM"
+                }
+            }
+        }
+    })
+}
+
+export const createIntegration = async (
+    clerkId: string,
+    token: string,
+    expire: Date,
+    igId?: string) => {
+    return await client.user.update({
+        where: {
+            clerkId
+        },
+        data: {
+            integrations: {
+                create: {
+                    name: "INSTAGRAM",
+                    token,
+                    expiresAt: expire,
+                    insagramId: igId
+                }
+            }
+        },
+        select: {
+            firstName: true,
+            lastName: true,
         }
     })
 }

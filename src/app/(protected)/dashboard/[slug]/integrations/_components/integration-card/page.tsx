@@ -1,5 +1,8 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
+import { onOAuthInstagram } from '@/actions/integrations'
+import { useQuery } from '@tanstack/react-query'
+import { onUserInfo } from '@/actions/user'
 
 type IntegrationCardProps = {
     title: string
@@ -9,6 +12,16 @@ type IntegrationCardProps = {
 }
 
 const IntegrationCard = ({ title, description, icon, strategy }: IntegrationCardProps) => {
+
+    const onInstaOAuth = () => onOAuthInstagram(strategy);
+
+    const { data } = useQuery({
+        queryKey: ['user-profile'],
+        queryFn: onUserInfo
+    })
+
+    const integrated = data?.data?.integrations?.find(integration => integration.name === strategy);
+
     return (
         <div className="border-2 border-[#3352CC] rounded-lg gap-x-5 p-5 flex flex-col sm:flex-row gap-y-5 items-center text-center sm:text-left">
             <div className="w-10 h-10  flex items-center justify-center sm:justify-betweeen">
@@ -21,13 +34,12 @@ const IntegrationCard = ({ title, description, icon, strategy }: IntegrationCard
                 </p>
             </div>
             <Button
-                // onClick={}
-                // disabled
+                onClick={onInstaOAuth}
+                disabled={integrated?.name === strategy}
                 className="bg-gradient-to-br text-white rounded-lg text-lg from-[#3352CC] font-medium to-[#1C2D70] hover:opacity-70 transition duration-100"
 
             >
-                {/* {integrated ? 'Connected' : 'Connect'} */}
-                Connect
+                {integrated ? 'Connected' : 'Connect'}
             </Button>
         </div>
     )

@@ -166,7 +166,7 @@ export const activateAutomation = async (id: string, state: boolean) => {
     await onCurrentUser();
     try {
         const update = await updateAutomation(id, { active: state });
-        if (update) return { status: 200, data: 'Updated' }
+        if (update) return { status: 200, data: `Automation ${state ? 'Activated' : 'Disabled'}` }
         return { status: 404, data: 'Not Updated' }
     } catch (error) {
         return { status: 500, data: 'Server Error' }
