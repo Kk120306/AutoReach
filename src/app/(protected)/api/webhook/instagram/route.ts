@@ -3,11 +3,7 @@ import { createChatHistory, getChatHistory, getKeywordAutomation, getKeywordPost
 import { sendDM } from "@/lib/fetch"
 import { client } from "@/lib/prisma"
 import { NextRequest, NextResponse } from "next/server"
-import OpenAI from "openai"
-
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+import { openai } from "@/lib/openai"
 
 
 
