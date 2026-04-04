@@ -8,7 +8,6 @@ import { updateIntegration } from "@/actions/integrations/queries"
 import Stripe from 'stripe'
 import { updateSubscription } from "@/actions/user/queries"
 
-const stripe = new Stripe(process.env.STRIPE_CLIENT_SECRET as string)
 
 export const onCurrentUser = async () => {
     const user = await currentUser()
@@ -109,6 +108,7 @@ export const onUserInfo = async () => {
 
 export const onSubscribe = async (sessionId: string) => {
     const user = await onCurrentUser()
+    const stripe = new Stripe(process.env.STRIPE_CLIENT_SECRET as string)
     try {
         const session = await stripe.checkout.sessions.retrieve(sessionId);
         if (session) {

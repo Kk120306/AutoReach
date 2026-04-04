@@ -2,9 +2,10 @@ import { currentUser } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_CLIENT_SECRET as string)
+export const dynamic = "force-dynamic"
 
 export async function GET() {
+    const stripe = new Stripe(process.env.STRIPE_CLIENT_SECRET as string)
     const user = await currentUser()
     if (!user) return NextResponse.json({ status: 404 })
 
