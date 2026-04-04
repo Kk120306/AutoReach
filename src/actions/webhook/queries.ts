@@ -116,15 +116,15 @@ export async function getChatHistory(
             createdAt: 'asc'
         },
         include: {
-            automation: true 
+            automation: true
         }
     });
 
     return {
-        history: dms.map(dm => ({
+        history: dms.map((dm: any) => ({
             role: 'assistant',
-            content: dm.message 
+            content: dm.message
         })),
-        automationId: dms[0]?.automationId ?? null 
+        automationId: dms[0]?.automationId ?? null
     };
 }
