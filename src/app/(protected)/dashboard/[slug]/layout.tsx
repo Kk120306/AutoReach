@@ -7,10 +7,12 @@ import { PrefetchUserProfile, PrefetchUserAutomations } from '@/react-query/pref
 
 type layoutProps = {
     children: React.ReactNode
-    params: { slug: string }
+    params: Promise<{ slug: string }>
 }
 
-const layout = async ({ children, params }: layoutProps) => {
+const layout = async (props: layoutProps) => {
+    const { children } = props;
+    const { slug } = await props.params;
 
     const query = new QueryClient();
     await PrefetchUserProfile(query);
@@ -19,11 +21,11 @@ const layout = async ({ children, params }: layoutProps) => {
     return (
         <HydrationBoundary state={dehydrate(query)}>
             <div className="p-3">
-                <Sidebar slug={params.slug} />
+                <Sidebar slug={slug} />
                 {/* NAVBAR */}
                 <div className="lg:ml-[250px]
             lg:pl-10 lg:py-5 px-2 flex flex-col overflow-auto ">
-                    <InfoBar slug={params.slug} />
+                    <InfoBar slug={slug} />
                     {children}
                 </div>
             </div>

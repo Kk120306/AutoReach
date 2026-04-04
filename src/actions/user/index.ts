@@ -5,9 +5,10 @@ import { redirect } from "next/navigation"
 import { createUser, findUser } from "./queries"
 import { refreshToken } from "@/lib/fetch"
 import { updateIntegration } from "@/actions/integrations/queries"
-import { stripe } from "@/app/(protected)/api/payment/route"
+import Stripe from 'stripe'
 import { updateSubscription } from "@/actions/user/queries"
 
+const stripe = new Stripe(process.env.STRIPE_CLIENT_SECRET as string)
 
 export const onCurrentUser = async () => {
     const user = await currentUser()

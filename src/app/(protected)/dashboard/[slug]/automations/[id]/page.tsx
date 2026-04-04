@@ -10,10 +10,11 @@ import PostNode from '@/components/global/automations/post/node';
 
 
 type PageProps = {
-    params: { id: string }
+    params: Promise<{ id: string }>
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata(props: { params: Promise<{ id: string }> }) {
+    const params = await props.params;
     const info = await getAutomationInfo(params.id);
     return {
         title: info.data?.name
@@ -21,7 +22,8 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 }
 
 
-const Page = async ({ params }: PageProps) => {
+const Page = async (props: PageProps) => {
+    const params = await props.params;
     const query = new QueryClient();
     await PrefetchUserAutomation(query, params.id);
 
@@ -36,7 +38,7 @@ const Page = async ({ params }: PageProps) => {
                     </div>
                     <Trigger id={params.id} />
                 </div>
-                <ThenNode id = {params.id} />
+                <ThenNode id={params.id} />
                 <PostNode id={params.id} />
             </div>
         </HydrationBoundary>

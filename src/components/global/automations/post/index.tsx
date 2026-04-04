@@ -28,7 +28,7 @@ const PostButton = ({ id }: PostButtonProps) => {
             {data?.status === 200 ? (
                 <div className="flex flex-col gap-y-3 w-full">
                     <div className="flex flex-wrap w-full gap-3">
-                        {data.data.data.map(() => ((post: InstagramPostProps) => (
+                        {data.data.data.map((post: InstagramPostProps) => (
                             <div
                                 className="relative w-4/12 aspect-square rounded-lg overflow-hidden cursor-pointer"
                                 key={post.id}
@@ -54,7 +54,7 @@ const PostButton = ({ id }: PostButtonProps) => {
                                     )}
                                 />
                             </div>
-                        )))}
+                        ))}
                     </div>
                     <Button onClick={mutate}
                         disabled={posts.length === 0}

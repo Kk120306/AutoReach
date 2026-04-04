@@ -47,7 +47,7 @@ export const useEditAutomation = (automationId: string) => {
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         }
-    }, []
+    }, [mutate]
     )
 
     return (
@@ -153,7 +153,7 @@ export const useAutomationPost = (id: string) => {
         })
     }
 
-    const { mutate, isPending} = useMutationData(
+    const { mutate, isPending } = useMutationData(
         ["attach-posts"],
         () => savePosts(id, posts),
         "automation-info",
@@ -161,5 +161,5 @@ export const useAutomationPost = (id: string) => {
     )
 
     return { posts, onSelectPost, mutate, isPending }
- 
+
 }

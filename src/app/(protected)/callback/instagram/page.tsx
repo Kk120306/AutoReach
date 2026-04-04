@@ -3,12 +3,13 @@ import { onIntegrate } from '@/actions/integrations'
 import { redirect } from 'next/navigation'
 
 type PageProps = {
-    searchParams: {
+    searchParams: Promise<{
         code: string
-    }
+    }>
 }
 
-const Page = async ({ searchParams: { code } }: PageProps) => {
+const Page = async (props: PageProps) => {
+    const { code } = await props.searchParams;
     if (code) {
         console.log(code);
         const user = await onIntegrate(code.split("#_")[0])

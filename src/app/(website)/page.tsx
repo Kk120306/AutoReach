@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Play } from "lucide-react"
-
+import Image from "next/image"
 // Modularising all reuable compoenents - others will be hard coded 
 
 import Navbar from "@/components/Navbar"
@@ -89,9 +89,11 @@ export default function LandingPage() {
                         <div className="absolute top-1/2 -left-12 w-8 h-8 border border-gray-700 rounded-full opacity-25"></div>
 
                         <div className="bg-gradient-to-br from-gray-900 to-gray-950 border border-gray-800 rounded-lg p-1 mx-auto max-w-4xl relative">
-                            <img
+                            <Image
                                 src="/placeholder.svg?height=600&width=800&text=AutoReach Dashboard"
                                 alt="AutoReach Dashboard"
+                                width={800}
+                                height={600}
                                 className="w-full rounded-md"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg pointer-events-none"></div>
@@ -138,7 +140,7 @@ export default function LandingPage() {
                 </div>
             </section>
 
-            <Footer /> 
+            <Footer />
 
         </div>
     )

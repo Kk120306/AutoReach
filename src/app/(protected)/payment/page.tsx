@@ -3,17 +3,18 @@ import { onSubscribe } from '@/actions/user'
 import { redirect } from 'next/navigation'
 
 type PageProps = {
-    searchParams: {
+    searchParams: Promise<{
         session_id?: string,
         cancel?: boolean,
-    }
+    }>
 }
 
-const Page = async ({ searchParams: { cancel, session_id } }: PageProps) => {
+const Page = async (props: PageProps) => {
+    const { cancel, session_id } = await props.searchParams;
     if (session_id) {
         const customer = await onSubscribe(session_id);
 
-        if(customer.status===200) {
+        if (customer.status === 200) {
             return redirect('/dashboard')
         }
 
@@ -25,7 +26,7 @@ const Page = async ({ searchParams: { cancel, session_id } }: PageProps) => {
         )
     }
 
-    if(cancel) {
+    if (cancel) {
         return (
             <div className="flex flex-col justify-center items-center h-screen w-full">
                 <h4 className="text-5xl font-bold">404</h4>
