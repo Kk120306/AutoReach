@@ -7,6 +7,8 @@ import { openai } from "@/lib/openai"
 
 
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(req: NextRequest) {
     const hub = req.nextUrl.searchParams.get('hub.challenge')
     return new NextResponse(hub)
