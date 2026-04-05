@@ -1,101 +1,106 @@
 # AutoReach
 
-An innovative email marketing and outreach automation platform built with Next.js that streamlines your outreach campaigns and makes connecting with prospects easier than ever before.
+An AI-driven social media automation platform designed to streamline Instagram engagement. Built with a modern serverless architecture on Next.js, AutoReach seamlessly processes Instagram webhooks to trigger intelligent, context-aware direct messages and comment replies powered by OpenAI.
 
-## Features
+---
 
-- **Email Campaign Management**: Create, schedule, and manage automated email outreach campaigns
-- **Contact Management**: Organize and segment your contacts for targeted outreach
-- **Analytics Dashboard**: Track email performance, open rates, and engagement metrics
-- **Template Builder**: Design beautiful, responsive email templates
-- **Automation Workflows**: Set up automated follow-up sequences
-- **Integration Ready**: Connect with popular CRM and marketing tools
+## Core Capabilities
 
-## Tech Stack
+- **Intelligent Keyword Matching:** Real-time webhook architecture intercepts Instagram comments and direct messages to selectively trigger automated workflows based on target phrases.
+- **Context-Aware AI Responses:** Integrates with OpenAI's GPT-4o models to parse conversation histories and generate highly contextualized, natural language replies.
+- **Idempotent Webhook Processing:** Robust backend routing guarantees reliable message delivery and state synchronization across Meta's Graph API.
+- **Secure Authentication & Billing:** Implements enterprise-grade identity management using Clerk, coupled with a frictionless subscription engine powered by Stripe.
+- **Type-Safe Data Layer:** Leverages Prisma ORM paired with a serverless Neon PostgreSQL database to ensure rigid data integrity and high availability.
 
-- **Framework**: [Next.js](https://nextjs.org/)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Database**: Prisma ORM
+---
 
-## Getting Started
+## Technical Stack
 
-### Installation
+- **Framework:** Next.js 15 (App Router, Server Actions)
+- **Language:** TypeScript (Strict Mode)
+- **Database:** PostgreSQL (Neon Serverless) / Prisma ORM
+- **Authentication:** Clerk
+- **Payments:** Stripe
+- **AI/LLM:** OpenAI API (gpt-4o)
+- **Styling:** Tailwind CSS / Radix UI Primitives
+- **Deployment:** Vercel (Edge Network / CI/CD pipeline integrated)
 
-1. Clone the repository:
+---
+
+## System Architecture
+
+```text
+AutoReach/
+├── prisma/               # Schema definitions and database migration state
+├── public/               # Static assets and screenshot repository
+├── src/
+│   ├── actions/          # Server Actions defining core business logic
+│   ├── app/              # Next.js App Router (Protected & Public boundaries)
+│   │   └── api/          # Stateless route handlers (Webhook ingestion points)
+│   ├── components/       # Reusable, accessible UI blocks
+│   └── lib/              # SDK initializations (OpenAI, Prisma, Stripe)
+├── .github/workflows/    # CI/CD pipelines enforcing static analysis tests
+└── .env.example          # Security schema documentation
+```
+
+---
+
+## Local Development Initialization
+
+### 1. Repository Setup
+
+Clone the repository and install dependencies natively via `pnpm`:
+
 ```bash
 git clone https://github.com/Kk120306/AutoReach.git
 cd AutoReach
+pnpm install --frozen-lockfile
 ```
 
-2. Install dependencies:
-```bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-```
+### 2. Environment Configuration
 
-3. Set up your environment variables:
+Copy the reference schema and populate it with your localized API keys:
+
 ```bash
 cp .env.example .env
 ```
-Edit `.env` and add your configuration:
-```
-DATABASE_URL="your-database-connection-string"
-NEXT_PUBLIC_API_URL="your-api-url"
-# Add other required environment variables
+
+Ensure the following critical configurations are provided:
+- `DATABASE_URL` (PostgreSQL connection string)
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` & `CLERK_SECRET_KEY`
+- `OPENAI_API_KEY`
+- `INSTAGRAM_CLIENT_ID` & `INSTAGRAM_CLIENT_SECRET`
+
+### 3. Database Hydration
+
+Initialize the Prisma schema and synchronize the client bindings:
+
+```bash
+pnpm prisma generate
+pnpm prisma db push
 ```
 
-4. Set up the database:
-```bash
-npx prisma generate
-npx prisma db push
-```
+### 4. Bootstrapping the Development Server
 
-5. Run the development server:
+Start the local build environment:
+
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
 ```
 
-6. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+Navigate to `http://localhost:3000` to access the application.
 
-## Project Structure
+---
 
-```
-AutoReach/
-├── prisma/          # Database schema and migrations
-├── public/          # Static assets
-├── src/
-│   ├── app/         # Next.js app directory
-│   ├── components/  # React components
-│   ├── lib/         # Utility functions and configurations
-│   └── styles/      # Global styles
-├── .gitignore
-├── next.config.mjs
-├── package.json
-├── tailwind.config.ts
-└── tsconfig.json
+## Ensuring Build Quality
+
+The repository strictly enforces static analysis via GitHub actions. You can independently verify pipeline readiness prior to commit:
+
+```bash
+pnpm type-check
+pnpm lint
+pnpm build
 ```
 
-## Usage
+---
 
-1. **Create a Campaign**: Navigate to the campaigns section and create a new email outreach campaign
-2. **Add Contacts**: Import or manually add contacts to your campaign
-3. **Design Your Email**: Use the template builder to create your email
-4. **Schedule & Send**: Set up your sending schedule or send immediately
-5. **Track Performance**: Monitor your campaign analytics in real-time
-
-## Deployment
-
-The easiest way to deploy your AutoReach application is to use the [Vercel Platform](https://vercel.com/new):
-
-1. Push your code to GitHub
-2. Import your repository to Vercel
-3. Configure your environment variables
-4. Deploy!
