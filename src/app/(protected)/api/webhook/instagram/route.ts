@@ -205,7 +205,7 @@ export async function POST(req: NextRequest) {
                     automation.listener?.listener === 'SMARTAI'
                 ) {
 
-                    const validMessages = customer_history.history
+                    const validMessages = (customer_history.history as { role: string | null; content: string | null }[])
                         .filter((msg): msg is { role: 'user' | 'assistant'; content: string } =>
                             (msg.role === 'user' || msg.role === 'assistant') &&
                             msg.content !== null
