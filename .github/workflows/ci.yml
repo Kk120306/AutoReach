@@ -12,7 +12,7 @@ jobs:
 
         env:
             # Clerk – dummy public key satisfies Next.js static analysis; real keys set in Vercel
-            NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_placeholder
+            NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_dW5pdGVkLXBpZ2Vvbi03Mi5jbGVyay5hY2NvdW50cy5kZXYk
             CLERK_SECRET_KEY: sk_test_placeholder
             NEXT_PUBLIC_CLERK_SIGN_IN_URL: /sign-in
             NEXT_PUBLIC_CLERK_SIGN_UP_URL: /sign-up
